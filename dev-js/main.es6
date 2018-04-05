@@ -47,12 +47,14 @@ import { arrayFind } from '../js-exports/polyfills';
 
   var color = d3.scaleOrdinal(d3.schemeCategory20);
 
-  var rScale = d3.scaleLog().range([0.5,5]);
-
+  var rScale = d3.scaleLog().range([0.3,3]);
+  var strengthScale = d3.scaleLinear().range([1,5]);
   var simulation = d3.forceSimulation()
+    .velocityDecay([0.5])
     .force("link", d3.forceLink())
-    .force("charge", d3.forceManyBody())
-    .force("center", d3.forceCenter(width / 2, height / 2));
+    .force("charge", d3.forceManyBody().strength(-1))
+    .force("center", d3.forceCenter(width / 2, height / 2))
+    .force("collide", d3.forceCollide().radius(function(d) { return rScale(d.count); }).iterations(2));
 
   d3.csv('matrix-headers.csv', function(data){
     console.log(data);
@@ -118,9 +120,28 @@ import { arrayFind } from '../js-exports/polyfills';
     }*/
 
     rScale.domain(d3.extent(network.nodes, d => d.count));
+    strengthScale.domain([1, d3.mean(network.links, d => d.value) + d3.deviation(network.links, d => d.value) * 2 ]);
 
     var radius = 2;
+    function count(node){
+      var i = 0;
+      network.links.forEach(link => {
+        if ( link.source === node || link.target === node ){
+          i++;
+        }
+      });
+      return i;
+    }
+    simulation
+        .nodes(network.nodes)
+        .on("tick", ticked);
 
+    simulation.force("link")
+        .links(network.links)
+        .strength(d => {
+        //  console.log(d);
+          return d.target.cluster === d.source.cluster ?  1 / Math.min(count(d.source), count(d.target)) : ( 1 / Math.min(count(d.source), count(d.target)) ) / 10; // reporoduce the default value for links that meet the criteria
+        });
     var svg = d3.select('body')
       .append('svg')
       .attr('width', '100%')
@@ -135,7 +156,11 @@ import { arrayFind } from '../js-exports/polyfills';
       .selectAll("line")
       .data(network.links)
       .enter().append("line")
-      .attr("stroke-width", function(d) { return Math.sqrt(d.value) / 20; });
+      .attr('stroke', d => {
+        
+        return d.source.cluster === d.target.cluster ? color(d.target.cluster) : '#999';
+      })
+      .attr("stroke-width", function(d) { return d.value > 9 || d.source.cluster === d.target.cluster ? Math.sqrt(d.value) / 20 : 0; }); 
 
     var node = svg.append("g")
       .attr("class", "nodes")
@@ -152,13 +177,6 @@ import { arrayFind } from '../js-exports/polyfills';
   node.append("title")
       .text(function(d) { return d.id; });
 
-  simulation
-      .nodes(network.nodes)
-      .on("tick", ticked);
-
-  simulation.force("link")
-      .links(network.links)
-      .strength(1);
 
   function ticked() {
     link
