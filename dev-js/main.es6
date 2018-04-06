@@ -43,12 +43,13 @@ import { arrayFind } from '../js-exports/polyfills';
         left:0
       },
       width = 100 - margin.right - margin.left,
-      height = 100 - margin.top - margin.bottom;
+      height = 100 - margin.top - margin.bottom,
+      threshold = 20;
 
   var color = d3.scaleOrdinal(d3.schemeCategory20);
 
   var rScale = d3.scaleLog().range([0.3,3]);
-  var strengthScale = d3.scaleLinear().range([1,5]);
+  var strengthScale = d3.scaleLinear().range([1,10]);
   var simulation = d3.forceSimulation()
     .velocityDecay([0.5])
     .force("link", d3.forceLink())
@@ -119,8 +120,15 @@ import { arrayFind } from '../js-exports/polyfills';
       return;
     }*/
 
+    simulation
+        .nodes(network.nodes)
+        .on("tick", ticked);
+
+    var linkForce = simulation.force("link")
+        .links(network.links);
+
     rScale.domain(d3.extent(network.nodes, d => d.count));
-    strengthScale.domain([1, d3.mean(network.links, d => d.value) + d3.deviation(network.links, d => d.value) * 2 ]);
+    strengthScale.domain([1, d3.mean(network.links, d => d.value) + d3.deviation(network.links, d => d.value) ]);
 
     var radius = 2;
     function count(node){
@@ -132,15 +140,12 @@ import { arrayFind } from '../js-exports/polyfills';
       });
       return i;
     }
-    simulation
-        .nodes(network.nodes)
-        .on("tick", ticked);
+    
 
-    simulation.force("link")
-        .links(network.links)
+        linkForce
         .strength(d => {
-        //  console.log(d);
-          return d.target.cluster === d.source.cluster ?  1 / Math.min(count(d.source), count(d.target)) : ( 1 / Math.min(count(d.source), count(d.target)) ) / 10; // reporoduce the default value for links that meet the criteria
+          //console.log(JSON.stringify(d));
+          return d.target.cluster === d.source.cluster ?  strengthScale(d.value) / Math.min(count(d.source), count(d.target)) : ( 1 / Math.min(count(d.source), count(d.target)) ) / 10; // reporoduce the default value for links that meet the criteria
         });
     var svg = d3.select('body')
       .append('svg')
@@ -158,9 +163,9 @@ import { arrayFind } from '../js-exports/polyfills';
       .enter().append("line")
       .attr('stroke', d => {
         
-        return d.source.cluster === d.target.cluster ? color(d.target.cluster) : '#999';
+        return d.source.cluster === d.target.cluster ? color(d.target.cluster) : '<div id="ddd"></div>';
       })
-      .attr("stroke-width", function(d) { return d.value > 9 || d.source.cluster === d.target.cluster ? Math.sqrt(d.value) / 20 : 0; }); 
+      .attr("stroke-width", function(d) { return d.value > threshold || d.source.cluster === d.target.cluster ? Math.sqrt(d.value) / 20 : 0; }); 
 
     var node = svg.append("g")
       .attr("class", "nodes")
