@@ -57,7 +57,7 @@ import { arrayFind } from '../js-exports/polyfills';
     .force("center", d3.forceCenter(width / 2, height / 2))
     .force("collide", d3.forceCollide().radius(function(d) { return rScale(d.count); }).iterations(2));
 
-  d3.csv('matrix-headers.csv', function(data){
+  d3.csv('adjacency-cx.csv', function(data){
     console.log(data);
     fishLinks = data;
     goGate();
