@@ -1,6 +1,6 @@
 .links line {
   
-  stroke-opacity: 0.15;
+  stroke-opacity: 0.05;
 }
 
 .nodes circle {
@@ -10,9 +10,13 @@
 }
 
 body {
-	width: 100vmin;
+	width: 100%;
 	margin: 0;
 
+}
+
+path.alaska {
+  fill: #cdcfd0;
 }
 
 /* d3-tip https://raw.githubusercontent.com/Caged/d3-tip/master/examples/example-styles.css */
