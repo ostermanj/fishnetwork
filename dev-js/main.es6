@@ -112,7 +112,7 @@ import { d3Tip } from '../js-vendor/d3-tip';
               target: index, 
               value: +each[key]
             });
-          // }
+         // }
         }
       }
     }); // end forEach
