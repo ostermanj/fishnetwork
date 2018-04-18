@@ -49,7 +49,7 @@ import { d3Tip } from '../js-vendor/d3-tip';
       },
     //  width = 100 - margin.right - margin.left,
     //  height = 52 - margin.top - margin.bottom,
-      threshold = 20;
+      threshold = 10;
 
   var colors = ['#30653a','#7d4f00','#4e597d','#2a616e','#a3301e','#81447f','#005fa9'];
 
@@ -256,7 +256,7 @@ import { d3Tip } from '../js-vendor/d3-tip';
     var node = svg.append("g")
       .attr("class", "nodes")
       .selectAll("circle")
-      .data(network.nodes.filter(d => d.area !== 'B'))
+      .data(network.nodes.filter(d => d.area !== 'B' && d.cluster !== 6 && d.cluster !== 7))
       .enter().append("circle")
         .attr("r", d => scaleFactor * rScale(d.count))
         .attr("cx", d => d.x)
