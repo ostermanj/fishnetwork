@@ -257,12 +257,17 @@ import { d3Tip } from '../js-vendor/d3-tip';
       .attr("class", "nodes")
       .selectAll("circle")
       .data(network.nodes.filter(d => d.area !== 'B' && d.cluster !== 6 && d.cluster !== 7))
-      .enter().append("circle")
+      .enter().append("g")
+        .attr("transform", d => 'translate(' + d.x + ',' + d.y + ')');
+
+    node.append('circle')
         .attr("r", d => scaleFactor * rScale(d.count))
-        .attr("cx", d => d.x)
-        .attr("cy", d => d.y)
         .attr("fill", function(d) { return colors[d.cluster -1]; })
         .call(nodeTooltip);
+
+    node.append('text')
+      .text(d => d.id)
+      .attr('transform', d => 'translate(0,' + ( -0.2 - rScale(d.count) * scaleFactor) + ')');
     
     node
         .on('mouseenter', function(e){
@@ -286,13 +291,9 @@ import { d3Tip } from '../js-vendor/d3-tip';
         .attr("y2", function(d) { return d.target.y; });
 
     node
-        .attr("cx", function(d) {
+        .attr("transform", function(d) {
           //d.x = Math.max(rScale(d.count), Math.min(width - rScale(d.count), d.x));
-          return d.x;
-        })
-        .attr("cy", function(d) {
-          //d.y = Math.max(rScale(d.count), Math.min(height - rScale(d.count), d.y));
-          return d.y;
+          return 'translate(' + d.x + ',' + d.y + ')';
         });
   }
 
