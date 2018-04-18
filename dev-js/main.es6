@@ -231,7 +231,7 @@ import { d3Tip } from '../js-vendor/d3-tip';
       })
       .attr("stroke-width", function(d) { 
         if ( d.value > threshold || d.source.cluster === d.target.cluster ) {
-          return Math.sqrt(d.value) / 10 > 0.002 ? Math.sqrt(d.value) / 10 : 0.002;
+          return rScale(d.value) * scaleFactor;
         } else {
           return 0;
         }
