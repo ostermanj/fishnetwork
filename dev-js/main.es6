@@ -204,7 +204,7 @@ import { d3Tip } from '../js-vendor/d3-tip';
       .attr('width', '100%')
       .attr('xmlns','http://www.w3.org/2000/svg')
       .attr('version','1.1')
-      .attr('viewBox', '0 0 100 52');
+      .attr('viewBox', '0 0 100 53');
 
       svg
         .append('g')
@@ -231,7 +231,7 @@ import { d3Tip } from '../js-vendor/d3-tip';
       })
       .attr("stroke-width", function(d) { 
         if ( d.value > threshold || d.source.cluster === d.target.cluster ) {
-          return rScale(d.value) * scaleFactor;
+          return rScale(d.value) * scaleFactor / 2;
         } else {
           return 0;
         }
@@ -267,7 +267,7 @@ import { d3Tip } from '../js-vendor/d3-tip';
 
     node.append('text')
       .text(d => d.id)
-      .attr('transform', d => 'translate(0,' + ( -0.2 - rScale(d.count) * scaleFactor) + ')');
+      .attr('transform', d => 'translate(0,' + ( -0.1 - rScale(d.count) * scaleFactor) + ')');
     
     node
         .on('mouseenter', function(e){

@@ -1,5 +1,6 @@
 .links line {
-  stroke-opacity: 0.05; }
+  mix-blend-mode: hard-light;
+  opacity: 0.15; }
 
 .nodes circle {
   stroke: #fff;
@@ -13,7 +14,8 @@ body {
   margin: 0; }
 
 path.alaska {
-  fill: #cdcfd0; }
+  fill: #BCBEC0;
+  stroke: #58585B; }
 
 /* d3-tip https://raw.githubusercontent.com/Caged/d3-tip/master/examples/example-styles.css */
 .d3-tip {
