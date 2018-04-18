@@ -35,9 +35,9 @@ import { d3Tip } from '../js-vendor/d3-tip';
 
   const scaleFactor = 100 / 760;
 
-  var gear = {"1":"PURSE SEINE","2":"VESSEL TO 80'","4":"SET GILLNET","5":"HAND TROLL","6":"LONGLINE VESSEL UNDER 60'","7":"OTTER TRAWL","8":"FISH WHEEL","9":"POT GEAR VESSEL UNDER 60'","10":"RING NET","11":"DIVING GEAR","12":"DIVE/HAND PICK","17":"BEAM TRAWL","18":"SHOVEL","21":"POUND","23":"MECHANICAL DIGGER","25":"DINGLEBAR TROLL","26":"MECHANICAL JIG","34":"GILLNET","37":"PAIR TRAWL","61":"LONGLINE VESSEL 60' OR OVER","77":"GILLNET","91":"POT GEAR VESSEL 60' OR OVER"};
+  var gear = {"1":"PURSE SEINE","2":"Beach seine","3":"Drift gillnet","4":"SET GILLNET","5":"HAND TROLL","6":"LONGLINE VESSEL UNDER 60'","7":"OTTER TRAWL","8":"FISH WHEEL","9":"POT GEAR VESSEL UNDER 60'","10":"RING NET","11":"DIVING GEAR","12":"DIVE/HAND PICK","17":"BEAM TRAWL","18":"SHOVEL","21":"POUND","23":"MECHANICAL DIGGER","25":"DINGLEBAR TROLL","26":"MECHANICAL JIG","34":"GILLNET","37":"PAIR TRAWL","19":"Pot gear","29":"Pot gear","39":"Pot gear","49":"Pot gear","59":"Pot gear","69":"Pot gear","61":"LONGLINE VESSEL 60' OR OVER","77":"GILLNET","91":"POT GEAR VESSEL 60' OR OVER"};
 
-  var regions = {"A":"SOUTHEAST","B":"STATEWIDE","D":"YAKUTAT","E":"PRINCE WILLIAM SOUND","J":"WESTWARD","L":"CHIGNIK","M":"ALASKA PENINSULA","Q":"BERING SEA","T":"BRISTOL BAY","X":"KOTZEBUE","H":"COOK INLET","S":"SECURITY COVE","V":"CAPE AVINOF","Z":"NORTON SOUND","K":"KODIAK","O":"DUTCH HARBOR","OA":"ALEUTIAN CDQAPICDA","OB":"ALEUTIAN CDQBBEDC","OC":"ALEUTIAN CDQCBSFA","OD":"ALEUTIAN CDQCVRF","OE":"ALEUTIAN CDQNSEDC","OF":"ALEUTIAN CDQYDFDA","OG":"ALEUTIAN ISLANDS ACAACDC","QA":"BERING SEA CDQAPICDA","QB":"BERING SEA CDQBBEDC","QC":"BERING SEA CDQCBSFA","QD":"BERING SEA CDQCVRF","QE":"BERING SEA CDQNSEDC","QF":"BERING SEA CDQYDFDA","TA":"BRISTOL BAY CDQAPICDA","TB":"BRISTOL BAY CDQBBEDC","TC":"BRISTOL BAY CDQCBSFA","TD":"BRISTOL BAY CDQCVRF","TE":"BRISTOL BAY CDQNSEDC","TF":"BRISTOL BAY CDQYDFDA","ZE":"NORTON SOUND CDQNSEDC","ZF":"NORTON SOUND CDQYDFDA","G":"GOA","AB":"STATEWIDE","AG":"GOA","BB":"STATEWIDE","BG":"GOA","FB":"STATEWIDE","FG":"GOA","GB":"STATEWIDE","GG":"GOA","HB":"STATEWIDE","HG":"GOA","IB":"STATEWIDE","IG":"GOA","F":"ATKA/AMLIA ISLANDS","R":"ADAK","AFW":"FEDERAL WATERS","ASW":"STATE WATERS","BFW":"FEDERAL WATERS","BSW":"STATE WATERS"};
+  var regions = {"A":"SOUTHEAST","B":"STATEWIDE","C":"Southern southeast","D":"YAKUTAT","E":"PRINCE WILLIAM SOUND","J":"WESTWARD","L":"CHIGNIK","M":"ALASKA PENINSULA","P":"Upper Yukon","Q":"BERING SEA","T":"BRISTOL BAY","U":"Nunivak Island","W":"Goodnews Bay","X":"KOTZEBUE","Y":"Cape Romanzof","H":"COOK INLET","S":"SECURITY COVE","V":"CAPE AVINOF","Z":"NORTON SOUND","K":"KODIAK","O":"DUTCH HARBOR","OA":"ALEUTIAN CDQAPICDA","OB":"ALEUTIAN CDQBBEDC","OC":"ALEUTIAN CDQCBSFA","OD":"ALEUTIAN CDQCVRF","OE":"ALEUTIAN CDQNSEDC","OF":"ALEUTIAN CDQYDFDA","OG":"ALEUTIAN ISLANDS ACAACDC","QA":"BERING SEA CDQAPICDA","QB":"BERING SEA CDQBBEDC","QC":"BERING SEA CDQCBSFA","QD":"BERING SEA CDQCVRF","QE":"BERING SEA CDQNSEDC","QF":"BERING SEA CDQYDFDA","TA":"BRISTOL BAY CDQAPICDA","TB":"BRISTOL BAY CDQBBEDC","TC":"BRISTOL BAY CDQCBSFA","TD":"BRISTOL BAY CDQCVRF","TE":"BRISTOL BAY CDQNSEDC","TF":"BRISTOL BAY CDQYDFDA","ZE":"NORTON SOUND CDQNSEDC","ZF":"NORTON SOUND CDQYDFDA","G":"GOA","AB":"STATEWIDE","AG":"GOA","BB":"STATEWIDE","BG":"GOA","FB":"STATEWIDE","FG":"GOA","GB":"STATEWIDE","GG":"GOA","HB":"STATEWIDE","HG":"GOA","IB":"STATEWIDE","IG":"GOA","F":"ATKA/AMLIA ISLANDS","R":"ADAK","AFW":"FEDERAL WATERS","ASW":"STATE WATERS","BFW":"FEDERAL WATERS","BSW":"STATE WATERS"};
 
   var fishNodes = null,
       fishLinks = null,
@@ -47,8 +47,8 @@ import { d3Tip } from '../js-vendor/d3-tip';
         bottom:0,
         left:0
       },
-      width = 100 - margin.right - margin.left,
-      height = 52 - margin.top - margin.bottom,
+    //  width = 100 - margin.right - margin.left,
+    //  height = 52 - margin.top - margin.bottom,
       threshold = 20;
 
   var colors = ['#30653a','#7d4f00','#4e597d','#2a616e','#a3301e','#81447f','#005fa9'];
@@ -56,11 +56,11 @@ import { d3Tip } from '../js-vendor/d3-tip';
   var rScale = d3.scaleSqrt().range([5,10]); // percentages
   //var strengthScale = d3.scaleLinear().range([1,10]);
   var simulation = d3.forceSimulation()
-    .velocityDecay([0.5])
-    .force("link", d3.forceLink().strength(0))
-    .force("charge", d3.forceManyBody().strength(-1))
+    
+    .force("link", d3.forceLink().strength(0));
+    /*.force("charge", d3.forceManyBody().strength(1.5))
     .force("center", d3.forceCenter(width / 2, height / 2))
-    .force("collide", d3.forceCollide().radius(2).iterations(2));//.radius(function(d) { return rScale(d.count); }).iterations(2));
+    .force("collide", d3.forceCollide().radius(2).iterations(2));//.radius(function(d) { return rScale(d.count); }).iterations(2));*/
 
     window.simulation = simulation;
 
@@ -69,7 +69,7 @@ import { d3Tip } from '../js-vendor/d3-tip';
     fishLinks = data;
     goGate();
   });
-  d3.csv('fisheries-nodes-no-count-no-index.csv', function(data){
+  d3.csv('fisheries-nodes-with-coords.csv', function(data){
     console.log(data);
     data.forEach(function(each){
       for (var key in each){
@@ -229,7 +229,14 @@ import { d3Tip } from '../js-vendor/d3-tip';
         
         return d.source.cluster === d.target.cluster ? colors[d.target.cluster - 1] : '#5a5a5a';
       })
-      .attr("stroke-width", function(d) { return d.value > threshold || d.source.cluster === d.target.cluster ? Math.sqrt(d.value) / 10 > 0.02 ? Math.sqrt(d.value) / 10 : 0.02 : 0; }); 
+      .attr("stroke-width", function(d) { 
+        if ( d.value > threshold || d.source.cluster === d.target.cluster ) {
+          return Math.sqrt(d.value) / 10 > 0.002 ? Math.sqrt(d.value) / 10 : 0.002;
+        } else {
+          return 0;
+        }
+      });
+        
 
     var nodeTooltip = d3.tip()
       .attr("class", "d3-tip label-tip")
@@ -252,6 +259,8 @@ import { d3Tip } from '../js-vendor/d3-tip';
       .data(network.nodes.filter(d => d.area !== 'B'))
       .enter().append("circle")
         .attr("r", d => scaleFactor * rScale(d.count))
+        .attr("cx", d => d.x)
+        .attr("cy", d => d.y)
         .attr("fill", function(d) { return colors[d.cluster -1]; })
         .call(nodeTooltip);
     
@@ -278,11 +287,11 @@ import { d3Tip } from '../js-vendor/d3-tip';
 
     node
         .attr("cx", function(d) {
-          d.x = Math.max(rScale(d.count), Math.min(width - rScale(d.count), d.x));
+          //d.x = Math.max(rScale(d.count), Math.min(width - rScale(d.count), d.x));
           return d.x;
         })
         .attr("cy", function(d) {
-          d.y = Math.max(rScale(d.count), Math.min(height - rScale(d.count), d.y));
+          //d.y = Math.max(rScale(d.count), Math.min(height - rScale(d.count), d.y));
           return d.y;
         });
   }
