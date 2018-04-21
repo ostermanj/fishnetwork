@@ -230,11 +230,16 @@ import { d3Tip } from '../js-vendor/d3-tip';
         return d.source.cluster === d.target.cluster ? colors[d.target.cluster - 1] : '#5a5a5a';
       })
       .attr("stroke-width", function(d) { 
-        if ( d.value > threshold || d.source.cluster === d.target.cluster ) {
           return rScale(d.value) * scaleFactor / 2;
-        } else {
-          return 0;
-        }
+      })
+      .attr("class", d => d.source.id + ' ' + d.target.id)
+      .classed('below-threshold', d => ( d.value < threshold && d.source.cluster !== d.target.cluster ) )
+      .style("display", d => {
+      	if ( d.value < threshold && d.source.cluster !== d.target.cluster ) {
+      		return 'none';
+      	} else {
+      		return null;
+      	}
       });
         
 
@@ -264,6 +269,11 @@ import { d3Tip } from '../js-vendor/d3-tip';
       	.attr("cx", d => d.x)
       	.attr("cy", d => d.y)
         .attr("r", d => scaleFactor * rScale(d.count))
+        .attr("data-area", d => regions[d.area] )
+        .attr("data-cluster", d => d.cluster)
+        .attr("data-species", d => species[d.species])
+        .attr("data-gear", d => gear[d.gear])
+        .attr("data-name", d => d.id)
         .attr("fill", function(d) { return colors[d.cluster -1]; });
 
     
