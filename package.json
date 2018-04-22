@@ -6,8 +6,12 @@
   "devDependencies": {
     "autoprefixer": "^6.5.3",
     "babel-cli": "^6.26.0",
+    "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.6.0",
     "babelify": "^7.3.0",
+    "css-condense": "^0.1.1",
+    "d3-selection": "^1.3.0",
+    "d3-tip": "^0.7.1",
     "grunt": "^0.4.5",
     "grunt-autoprefixer": "*",
     "grunt-browserify": "^5.2.0",
@@ -21,7 +25,6 @@
     "grunt-postcss": "^0.8.0",
     "htmlhint": "^0.9.13",
     "matchdep": "*",
-    "postcss-import": "^11.0.0",
-    "babel-polyfill": "^6.26.0"
+    "postcss-import": "^11.0.0"
   }
 }
