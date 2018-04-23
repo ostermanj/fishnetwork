@@ -1,13 +1,17 @@
 var svg = document.getElementById('alaska-map');
+var timeoutShow,
+	timeoutHide;
 console.log(svg);
 
 svg.querySelectorAll('circle').forEach(c => {
 	console.log(c);
 	c.addEventListener('mouseenter', function(){
+		this.classList.add('active');
 		showLinks(this.dataset);
 		showDetails(this.dataset);
 	});
 	c.addEventListener('mouseleave', function(){
+		this.classList.remove('active');
 		hideLinks(this.dataset);
 		hideDetails();
 	});
@@ -30,32 +34,29 @@ function hideLinks(d){
 	});
 }
 function showDetails(d){
-	var html = `<br/>
-				<b>${d.name}</b><br />
-				Species: ${d.species}<br />
-				Gear: ${d.gear}<br />
-				Area: ${d.area}<br />
-				<br />
-				Number of permits: ${d.count}`;
-	var contentDiv = document.getElementById('content-div');
-	contentDiv.classList.add('active');
-	contentDiv.insertAdjacentHTML('beforeend',html);
-
+	clearTimeout(timeoutHide);
+	var html = `<b>${d.name}</b><br /><b>Species</b>: ${d.species} | <b>Gear</b>: ${d.gear} | <b>Area</b>: ${d.area} | <b>Number of permits</b>: ${d.count}`;
+	var overlayDiv = document.getElementById('overlay-div');
+	overlayDiv.style.opacity = 0;
+	timeoutShow = setTimeout(function(){
+		overlayDiv.innerHTML = html;
+		overlayDiv.style.opacity = 1;
+	},250);
 }
 function hideDetails(){
-	var contentDiv = document.getElementById('content-div');
-	contentDiv.classList.remove('active');
-	setTimeout(function(){
-		contentDiv.innerHTML = '';
-	},500);
+	clearTimeout(timeoutShow);
+	var html = 'Select a fishery for details.';
+	var overlayDiv = document.getElementById('overlay-div');
+	overlayDiv.style.opacity = 0;
+	timeoutHide = setTimeout(function(){
+		overlayDiv.innerHTML = html;
+		overlayDiv.style.opacity = 1;
+	},250);
 
 }
 function dataOverlay(){
 	var overlayDiv = document.createElement('div');
 	overlayDiv.id = 'overlay-div';
-	overlayDiv.innerText = 'Select a fishery for details.';
-	var contentDiv = document.createElement('div');
-	contentDiv.id = 'content-div';
-	overlayDiv.appendChild(contentDiv);
+	overlayDiv.innerHTML = 'Select a fishery for details.';
 	document.getElementById('map-container').appendChild(overlayDiv);
 }

@@ -1,20 +1,17 @@
 $blue: #051839;
 
-body {
-  max-width: 760px;
+#map-container {
+  position: relative;
 }
 
 #overlay-div {
   position: absolute;
   top:0;
-}
-
-#content-div {
-  opacity: 0;
-  transition: opacity 0.5s linear;
-  &.active {
-    opacity: 1;
-  }
+  background: rgba(255,255,255,0.8);
+  opacity: 1;
+  transition: opacity 0.25s linear; 
+  padding:10px;
+  
 }
 
 svg#alaska-map {
