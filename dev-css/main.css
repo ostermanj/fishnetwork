@@ -5,12 +5,21 @@ body {
   position: absolute;
   top: 0; }
 
+#content-div {
+  opacity: 0;
+  transition: opacity 0.5s linear; }
+  #content-div.active {
+    opacity: 1; }
+
 svg#alaska-map .links line {
   mix-blend-mode: hard-light;
   opacity: 0.30; }
 svg#alaska-map .nodes circle {
   stroke: #fff;
   stroke-width: 0.1px; }
+  svg#alaska-map .nodes circle.active {
+    stroke: #c7922b;
+    stroke-width: 0.2px; }
 svg#alaska-map .nodes text {
   font-size: 1px; }
 svg#alaska-map path.alaska {

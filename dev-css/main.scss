@@ -9,16 +9,30 @@ body {
   top:0;
 }
 
+#content-div {
+  opacity: 0;
+  transition: opacity 0.5s linear;
+  &.active {
+    opacity: 1;
+  }
+}
+
 svg#alaska-map {
   .links line {
     
     mix-blend-mode: hard-light;
     opacity: 0.30;
+    //transition: opacity 0.2s linear;
   }
 
   .nodes circle {
     stroke: #fff;
     stroke-width: 0.1px;
+    //transition: stroke 0.2s linear;
+    &.active {
+      stroke: #c7922b;
+      stroke-width: 0.2px;
+    }
 
   }
 

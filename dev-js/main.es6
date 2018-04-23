@@ -34,13 +34,21 @@ function showDetails(d){
 				<b>${d.name}</b><br />
 				Species: ${d.species}<br />
 				Gear: ${d.gear}<br />
-				Area: ${d.area}`;
-	
-	document.getElementById('content-div').insertAdjacentHTML('beforeend',html);
+				Area: ${d.area}<br />
+				<br />
+				Number of permits: ${d.count}`;
+	var contentDiv = document.getElementById('content-div');
+	contentDiv.classList.add('active');
+	contentDiv.insertAdjacentHTML('beforeend',html);
 
 }
 function hideDetails(){
-	document.getElementById('content-div').innerHTML = '';
+	var contentDiv = document.getElementById('content-div');
+	contentDiv.classList.remove('active');
+	setTimeout(function(){
+		contentDiv.innerHTML = '';
+	},500);
+
 }
 function dataOverlay(){
 	var overlayDiv = document.createElement('div');
