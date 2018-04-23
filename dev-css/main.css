@@ -1,9 +1,13 @@
 body {
   max-width: 760px; }
 
+#overlay-div {
+  position: absolute;
+  top: 0; }
+
 svg#alaska-map .links line {
   mix-blend-mode: hard-light;
-  opacity: 0.15; }
+  opacity: 0.30; }
 svg#alaska-map .nodes circle {
   stroke: #fff;
   stroke-width: 0.1px; }
