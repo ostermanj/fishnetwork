@@ -25,10 +25,47 @@ svg#alaska-map {
   .nodes circle {
     stroke: #fff;
     stroke-width: 0.1px;
-    //transition: stroke 0.2s linear;
-    &.active {
-      stroke: #c7922b;
-      stroke-width: 0.2px;
+    &.cluster-1 {
+      fill: #30653a;
+      &.active {
+        fill: lighten(#30653a, 20%);
+      }
+    }
+    &.cluster-2 {
+      fill: #7d4f00;
+      &.active {
+        fill: lighten(#7d4f00, 20%);
+      }
+    }
+    &.cluster-3 {
+      fill: #4e597d;
+      &.active {
+        fill: lighten(#4e597d, 20%);
+      }
+    }
+    &.cluster-4 {
+      fill: #2a616e;
+      &.active {
+        fill: lighten(#2a616e, 20%);
+      }
+    }
+    &.cluster-5 {
+      fill: #a3301e;
+      &.active {
+        fill: lighten(#a3301e, 20%);
+      }
+    }
+    &.cluster-6 {
+      fill: #81447f;
+      &.active {
+        fill: lighten(#81447f, 20%);
+      }
+    }
+    &.cluster-7 {
+      fill: #005fa9;
+      &.active {
+        fill: lighten(#005fa9, 20%);
+      }
     }
 
   }

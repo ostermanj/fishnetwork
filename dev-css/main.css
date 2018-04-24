@@ -15,9 +15,34 @@ svg#alaska-map .links line {
 svg#alaska-map .nodes circle {
   stroke: #fff;
   stroke-width: 0.1px; }
-  svg#alaska-map .nodes circle.active {
-    stroke: #c7922b;
-    stroke-width: 0.2px; }
+  svg#alaska-map .nodes circle.cluster-1 {
+    fill: #30653a; }
+    svg#alaska-map .nodes circle.cluster-1.active {
+      fill: #51aa62; }
+  svg#alaska-map .nodes circle.cluster-2 {
+    fill: #7d4f00; }
+    svg#alaska-map .nodes circle.cluster-2.active {
+      fill: #e38f00; }
+  svg#alaska-map .nodes circle.cluster-3 {
+    fill: #4e597d; }
+    svg#alaska-map .nodes circle.cluster-3.active {
+      fill: #818cb0; }
+  svg#alaska-map .nodes circle.cluster-4 {
+    fill: #2a616e; }
+    svg#alaska-map .nodes circle.cluster-4.active {
+      fill: #46a2b8; }
+  svg#alaska-map .nodes circle.cluster-5 {
+    fill: #a3301e; }
+    svg#alaska-map .nodes circle.cluster-5.active {
+      fill: #de5d49; }
+  svg#alaska-map .nodes circle.cluster-6 {
+    fill: #81447f; }
+    svg#alaska-map .nodes circle.cluster-6.active {
+      fill: #b675b4; }
+  svg#alaska-map .nodes circle.cluster-7 {
+    fill: #005fa9; }
+    svg#alaska-map .nodes circle.cluster-7.active {
+      fill: #1096ff; }
 svg#alaska-map .nodes text {
   font-size: 1px; }
 svg#alaska-map path.alaska {

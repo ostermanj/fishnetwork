@@ -1,23 +1,55 @@
 var svg = document.getElementById('alaska-map');
 var timeoutShow,
-	timeoutHide;
-console.log(svg);
+	timeoutHide,
+	listenersAreOn;
 
-svg.querySelectorAll('circle').forEach(c => {
-	console.log(c);
-	c.addEventListener('mouseenter', function(){
-		this.classList.add('active');
-		showLinks(this.dataset);
-		showDetails(this.dataset);
-	});
-	c.addEventListener('mouseleave', function(){
-		this.classList.remove('active');
-		hideLinks(this.dataset);
-		hideDetails();
-	});
-});
+
 
 dataOverlay();
+addEventListeners();
+
+document.querySelector('body').addEventListener('click', addEventListeners);
+
+function addEventListeners(){
+	console.log('add');
+	if ( listenersAreOn !== true ){
+		listenersAreOn = true;
+		document.querySelectorAll('line.active').forEach(l => { // need to handle line opacity via css class so that it can be selected here
+			l.classList.remove('active');
+		});
+		var activeNode = document.querySelector('circle.active');
+		if ( activeNode ) {
+			activeNode.classList.remove('active');
+		}
+		svg.querySelectorAll('circle').forEach(c => {
+			c.addEventListener('mouseenter', activate);
+			c.addEventListener('mouseleave', deactivate);
+			c.addEventListener('click', removeEventListeners);
+		});
+	}
+}
+
+function removeEventListeners(e){
+	listenersAreOn = false;
+	e.stopPropagation();
+	svg.querySelectorAll('circle').forEach(c => {
+		c.removeEventListener('mouseenter', activate);
+		c.removeEventListener('mouseleave', deactivate);
+		c.removeEventListener('click', removeEventListeners);
+	});
+}
+
+function activate(){
+	this.classList.add('active');
+	showLinks(this.dataset);
+	showDetails(this.dataset);
+}
+
+function deactivate(){
+	this.classList.remove('active');
+	hideLinks(this.dataset);
+	hideDetails();
+}
 
 function showLinks(d){
 	svg.querySelectorAll('line.' + d.name).forEach(l => {
