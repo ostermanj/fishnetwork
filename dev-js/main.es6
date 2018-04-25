@@ -11,7 +11,6 @@ addEventListeners();
 document.querySelector('body').addEventListener('click', addEventListeners);
 
 function addEventListeners(){
-	console.log('add');
 	if ( listenersAreOn !== true ){
 		listenersAreOn = true;
 		document.querySelectorAll('line.active').forEach(l => { // need to handle line opacity via css class so that it can be selected here
@@ -64,11 +63,23 @@ function deactivate(){
 function showLinks(d){
 	svg.querySelectorAll('line.' + d.name).forEach(l => {
 		l.classList.add('active');
+		var attachedNodes = l.className.baseVal.match(/[A-Z]+-.*?-[^ ]/g);
+		attachedNodes.forEach(ndId => {
+			if ( ndId !== d.name ){
+				let nd = svg.querySelector('circle[data-name="' + ndId + '"]');
+				if ( nd ) {
+					nd.classList.add('attached');
+				}
+			}
+		});
 	});
 }
 function hideLinks(d){
 	svg.querySelectorAll('line.' + d.name).forEach(l => {
 		l.classList.remove('active');
+	});
+	svg.querySelectorAll('circle.attached').forEach(c => {
+		c.classList.remove('attached');
 	});
 }
 function showDetails(d){
@@ -83,7 +94,7 @@ function showDetails(d){
 }
 function hideDetails(){
 	clearTimeout(timeoutShow);
-	var html = 'Select a fishery for details.';
+	var html = 'Select a fishery or tab through for details.';
 	var overlayDiv = document.getElementById('overlay-div');
 	overlayDiv.style.opacity = 0;
 	timeoutHide = setTimeout(function(){
@@ -95,6 +106,6 @@ function hideDetails(){
 function dataOverlay(){
 	var overlayDiv = document.createElement('div');
 	overlayDiv.id = 'overlay-div';
-	overlayDiv.innerHTML = 'Select a fishery for details.';
+	overlayDiv.innerHTML = 'Select a fishery or tab through for details.';
 	document.getElementById('map-container').appendChild(overlayDiv);
 }

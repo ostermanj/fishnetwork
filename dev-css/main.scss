@@ -2,6 +2,7 @@ $blue: #051839;
 
 #map-container {
   position: relative;
+  padding-top: 40px;
 }
 
 #overlay-div {
@@ -66,45 +67,51 @@ svg#alaska-map {
     }
     &.cluster-1 {
       fill: #30653a;
-      &.active {
+      &.active, &.attached {
         fill: lighten(#30653a, 20%);
       }
     }
     &.cluster-2 {
       fill: #7d4f00;
-      &.active {
+      &.active, &.attached {
         fill: lighten(#7d4f00, 20%);
       }
+
     }
     &.cluster-3 {
       fill: #4e597d;
-      &.active {
+      &.active, &.attached {
         fill: lighten(#4e597d, 20%);
       }
+
     }
     &.cluster-4 {
       fill: #2a616e;
-      &.active {
+      &.active, &.attached {
         fill: lighten(#2a616e, 20%);
       }
+
     }
     &.cluster-5 {
       fill: #a3301e;
-      &.active {
+      &.active, &.attached {
         fill: lighten(#a3301e, 20%);
       }
+
     }
     &.cluster-6 {
       fill: #81447f;
-      &.active {
+      &.active, &.attached {
         fill: lighten(#81447f, 20%);
       }
+
     }
     &.cluster-7 {
       fill: #005fa9;
-      &.active {
+      &.active, &.attached {
         fill: lighten(#005fa9, 20%);
       }
+
     }
 
   }
