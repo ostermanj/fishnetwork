@@ -57,6 +57,13 @@ svg#alaska-map {
   .nodes circle {
     stroke: #fff;
     stroke-width: 0.1px;
+    &:focus {
+      outline: none;
+    }
+    &.active {
+      stroke:gold;
+      stroke-width: 0.5px;
+    }
     &.cluster-1 {
       fill: #30653a;
       &.active {

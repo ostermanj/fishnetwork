@@ -37,6 +37,11 @@ svg#alaska-map .links line {
 svg#alaska-map .nodes circle {
   stroke: #fff;
   stroke-width: 0.1px; }
+  svg#alaska-map .nodes circle:focus {
+    outline: none; }
+  svg#alaska-map .nodes circle.active {
+    stroke: gold;
+    stroke-width: 0.5px; }
   svg#alaska-map .nodes circle.cluster-1 {
     fill: #30653a; }
     svg#alaska-map .nodes circle.cluster-1.active {

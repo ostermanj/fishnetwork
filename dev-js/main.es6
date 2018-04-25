@@ -24,6 +24,8 @@ function addEventListeners(){
 		svg.querySelectorAll('circle').forEach(c => {
 			c.addEventListener('mouseenter', activate);
 			c.addEventListener('mouseleave', deactivate);
+			c.addEventListener('focus', activate);
+			c.addEventListener('blur', deactivate);
 			c.addEventListener('click', removeEventListeners);
 		});
 	}
@@ -39,7 +41,15 @@ function removeEventListeners(e){
 	});
 }
 
-function activate(){
+function activate(e){
+	if (e.type !== 'focus') {
+		document.activeElement.blur();
+	} else {
+		let circle = document.querySelector('circle.active');
+		if ( circle ) {
+			deactivate.call(circle);
+		}
+	}
 	this.classList.add('active');
 	showLinks(this.dataset);
 	showDetails(this.dataset);
