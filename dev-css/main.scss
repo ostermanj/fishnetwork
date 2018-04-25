@@ -19,7 +19,36 @@ svg#alaska-map {
     
     mix-blend-mode: hard-light;
     opacity: 0.30;
-    //transition: opacity 0.2s linear;
+    &.below-threshold {
+      display: none;
+      &.active {
+        display: initial;
+      }
+    }
+    &.active {
+      opacity: 0.6;
+    }
+    &.cluster-1 {
+      stroke: #30653a;
+    }
+    &.cluster-2 {
+      stroke: #7d4f00;
+    }
+    &.cluster-3 {
+      stroke: #4e597d;
+    }
+    &.cluster-4 {
+      stroke: #2a616e;
+    }
+    &.cluster-5 {
+      stroke: #a3301e;
+    }
+    &.cluster-6 {
+      stroke: #81447f;
+    }
+    &.cluster-7 {
+      stroke: #005fa9;
+    }
   }
 
   .nodes circle {

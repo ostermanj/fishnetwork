@@ -12,6 +12,26 @@
 svg#alaska-map .links line {
   mix-blend-mode: hard-light;
   opacity: 0.30; }
+  svg#alaska-map .links line.below-threshold {
+    display: none; }
+    svg#alaska-map .links line.below-threshold.active {
+      display: initial; }
+  svg#alaska-map .links line.active {
+    opacity: 0.6; }
+  svg#alaska-map .links line.cluster-1 {
+    stroke: #30653a; }
+  svg#alaska-map .links line.cluster-2 {
+    stroke: #7d4f00; }
+  svg#alaska-map .links line.cluster-3 {
+    stroke: #4e597d; }
+  svg#alaska-map .links line.cluster-4 {
+    stroke: #2a616e; }
+  svg#alaska-map .links line.cluster-5 {
+    stroke: #a3301e; }
+  svg#alaska-map .links line.cluster-6 {
+    stroke: #81447f; }
+  svg#alaska-map .links line.cluster-7 {
+    stroke: #005fa9; }
 svg#alaska-map .nodes circle {
   stroke: #fff;
   stroke-width: 0.1px; }

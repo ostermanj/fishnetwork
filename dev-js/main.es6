@@ -53,16 +53,12 @@ function deactivate(){
 
 function showLinks(d){
 	svg.querySelectorAll('line.' + d.name).forEach(l => {
-		l.style.display = 'initial';
-		l.style.opacity = 0.6;
+		l.classList.add('active');
 	});
 }
 function hideLinks(d){
 	svg.querySelectorAll('line.' + d.name).forEach(l => {
-		l.style.opacity = 0.3;
-	});
-	svg.querySelectorAll('line.below-threshold.' + d.name).forEach(l => {
-		l.style.display = 'none';
+		l.classList.remove('active');
 	});
 }
 function showDetails(d){
