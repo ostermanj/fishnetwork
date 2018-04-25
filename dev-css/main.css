@@ -1,6 +1,7 @@
 #map-container {
   position: relative;
-  padding-top: 40px; }
+  padding-top: 40px;
+  padding-bottom: calc(53% + 40px); }
 
 #overlay-div {
   position: absolute;
@@ -10,71 +11,76 @@
   transition: opacity 0.25s linear;
   padding: 10px; }
 
-svg#alaska-map .links line {
-  mix-blend-mode: hard-light;
-  opacity: 0.30; }
-  svg#alaska-map .links line.below-threshold {
-    display: none; }
-    svg#alaska-map .links line.below-threshold.active {
-      display: initial; }
-  svg#alaska-map .links line.active {
-    opacity: 0.6; }
-  svg#alaska-map .links line.cluster-1 {
-    stroke: #30653a; }
-  svg#alaska-map .links line.cluster-2 {
-    stroke: #7d4f00; }
-  svg#alaska-map .links line.cluster-3 {
-    stroke: #4e597d; }
-  svg#alaska-map .links line.cluster-4 {
-    stroke: #2a616e; }
-  svg#alaska-map .links line.cluster-5 {
-    stroke: #a3301e; }
-  svg#alaska-map .links line.cluster-6 {
-    stroke: #81447f; }
-  svg#alaska-map .links line.cluster-7 {
-    stroke: #005fa9; }
-  svg#alaska-map .links line.no-cluster {
-    stroke: #5a5a5a; }
-svg#alaska-map .nodes circle {
-  stroke: #fff;
-  stroke-width: 0.1px; }
-  svg#alaska-map .nodes circle:focus {
-    outline: none; }
-  svg#alaska-map .nodes circle.active {
-    stroke: gold;
-    stroke-width: 0.5px; }
-  svg#alaska-map .nodes circle.cluster-1 {
-    fill: #30653a; }
-    svg#alaska-map .nodes circle.cluster-1.active, svg#alaska-map .nodes circle.cluster-1.attached {
-      fill: #51aa62; }
-  svg#alaska-map .nodes circle.cluster-2 {
-    fill: #7d4f00; }
-    svg#alaska-map .nodes circle.cluster-2.active, svg#alaska-map .nodes circle.cluster-2.attached {
-      fill: #e38f00; }
-  svg#alaska-map .nodes circle.cluster-3 {
-    fill: #4e597d; }
-    svg#alaska-map .nodes circle.cluster-3.active, svg#alaska-map .nodes circle.cluster-3.attached {
-      fill: #818cb0; }
-  svg#alaska-map .nodes circle.cluster-4 {
-    fill: #2a616e; }
-    svg#alaska-map .nodes circle.cluster-4.active, svg#alaska-map .nodes circle.cluster-4.attached {
-      fill: #46a2b8; }
-  svg#alaska-map .nodes circle.cluster-5 {
-    fill: #a3301e; }
-    svg#alaska-map .nodes circle.cluster-5.active, svg#alaska-map .nodes circle.cluster-5.attached {
-      fill: #de5d49; }
-  svg#alaska-map .nodes circle.cluster-6 {
-    fill: #81447f; }
-    svg#alaska-map .nodes circle.cluster-6.active, svg#alaska-map .nodes circle.cluster-6.attached {
-      fill: #b675b4; }
-  svg#alaska-map .nodes circle.cluster-7 {
-    fill: #005fa9; }
-    svg#alaska-map .nodes circle.cluster-7.active, svg#alaska-map .nodes circle.cluster-7.attached {
-      fill: #1096ff; }
-svg#alaska-map .nodes text {
-  font-size: 1px; }
-svg#alaska-map path.alaska {
-  fill: #BCBEC0;
-  stroke: #58585B; }
+svg#alaska-map {
+  position: absolute;
+  top: 40px; }
+  svg#alaska-map .links line {
+    mix-blend-mode: hard-light;
+    opacity: 0.30; }
+    svg#alaska-map .links line.below-threshold {
+      display: none; }
+      svg#alaska-map .links line.below-threshold.active {
+        display: initial; }
+    svg#alaska-map .links line.active {
+      opacity: 0.6; }
+    svg#alaska-map .links line.cluster-1 {
+      stroke: #30653a; }
+    svg#alaska-map .links line.cluster-2 {
+      stroke: #7d4f00; }
+    svg#alaska-map .links line.cluster-3 {
+      stroke: #4e597d; }
+    svg#alaska-map .links line.cluster-4 {
+      stroke: #2a616e; }
+    svg#alaska-map .links line.cluster-5 {
+      stroke: #a3301e; }
+    svg#alaska-map .links line.cluster-6 {
+      stroke: #81447f; }
+    svg#alaska-map .links line.cluster-7 {
+      stroke: #005fa9; }
+    svg#alaska-map .links line.no-cluster {
+      stroke: #5a5a5a; }
+  svg#alaska-map .nodes circle {
+    stroke: #fff;
+    stroke-width: 0.1px; }
+    svg#alaska-map .nodes circle:focus {
+      outline: none; }
+    svg#alaska-map .nodes circle.active {
+      stroke: gold;
+      stroke-width: 0.5px; }
+    svg#alaska-map .nodes circle.cluster-1 {
+      fill: #30653a; }
+      svg#alaska-map .nodes circle.cluster-1.active, svg#alaska-map .nodes circle.cluster-1.attached {
+        fill: #51aa62; }
+    svg#alaska-map .nodes circle.cluster-2 {
+      fill: #7d4f00; }
+      svg#alaska-map .nodes circle.cluster-2.active, svg#alaska-map .nodes circle.cluster-2.attached {
+        fill: #e38f00; }
+      svg#alaska-map .nodes circle.cluster-2.active {
+        stroke: #46a2b8; }
+    svg#alaska-map .nodes circle.cluster-3 {
+      fill: #4e597d; }
+      svg#alaska-map .nodes circle.cluster-3.active, svg#alaska-map .nodes circle.cluster-3.attached {
+        fill: #818cb0; }
+    svg#alaska-map .nodes circle.cluster-4 {
+      fill: #2a616e; }
+      svg#alaska-map .nodes circle.cluster-4.active, svg#alaska-map .nodes circle.cluster-4.attached {
+        fill: #46a2b8; }
+    svg#alaska-map .nodes circle.cluster-5 {
+      fill: #a3301e; }
+      svg#alaska-map .nodes circle.cluster-5.active, svg#alaska-map .nodes circle.cluster-5.attached {
+        fill: #de5d49; }
+    svg#alaska-map .nodes circle.cluster-6 {
+      fill: #81447f; }
+      svg#alaska-map .nodes circle.cluster-6.active, svg#alaska-map .nodes circle.cluster-6.attached {
+        fill: #b675b4; }
+    svg#alaska-map .nodes circle.cluster-7 {
+      fill: #005fa9; }
+      svg#alaska-map .nodes circle.cluster-7.active, svg#alaska-map .nodes circle.cluster-7.attached {
+        fill: #1096ff; }
+  svg#alaska-map .nodes text {
+    font-size: 1px; }
+  svg#alaska-map path.alaska {
+    fill: #BCBEC0;
+    stroke: #58585B; }
 
 /*# sourceMappingURL=main.css.map */

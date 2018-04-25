@@ -3,6 +3,7 @@ $blue: #051839;
 #map-container {
   position: relative;
   padding-top: 40px;
+  padding-bottom: calc(53% + 40px);
 }
 
 #overlay-div {
@@ -16,6 +17,8 @@ $blue: #051839;
 }
 
 svg#alaska-map {
+  position: absolute;
+  top: 40px;
   .links line {
     
     mix-blend-mode: hard-light;
@@ -75,6 +78,9 @@ svg#alaska-map {
       fill: #7d4f00;
       &.active, &.attached {
         fill: lighten(#7d4f00, 20%);
+      }
+      &.active {
+        stroke: lighten(#2a616e, 20%);
       }
 
     }

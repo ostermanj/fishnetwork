@@ -1,3 +1,8 @@
+/* exported ForEach, NodeListForEach, ClassList */
+import { ForEach } from '../js-exports/ForEach.js';
+import { NodeListForEach } from '../js-exports/NodeListForEach.js';
+import { ClassList } from '../js-exports/ClassList.js';
+
 var svg = document.getElementById('alaska-map');
 var timeoutShow,
 	timeoutHide,
