@@ -32,6 +32,8 @@ svg#alaska-map .links line {
     stroke: #81447f; }
   svg#alaska-map .links line.cluster-7 {
     stroke: #005fa9; }
+  svg#alaska-map .links line.no-cluster {
+    stroke: #5a5a5a; }
 svg#alaska-map .nodes circle {
   stroke: #fff;
   stroke-width: 0.1px; }

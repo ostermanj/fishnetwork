@@ -49,6 +49,9 @@ svg#alaska-map {
     &.cluster-7 {
       stroke: #005fa9;
     }
+    &.no-cluster {
+      stroke: #5a5a5a;
+    }
   }
 
   .nodes circle {
