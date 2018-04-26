@@ -2,8 +2,7 @@ $blue: #051839;
 
 #map-container {
   position: relative;
-  padding-top: 40px;
-  padding-bottom: calc(53% + 40px);
+  padding-bottom: calc(53% + 80px);
 }
 
 #overlay-div {
@@ -13,12 +12,18 @@ $blue: #051839;
   opacity: 1;
   transition: opacity 0.25s linear; 
   padding:10px;
-  
+}
+
+#detail-wrapper {
+  min-height: 70px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
 }
 
 svg#alaska-map {
   position: absolute;
-  top: 40px;
+  top: 80px;
   .links line {
     
     mix-blend-mode: hard-light;
@@ -70,52 +75,69 @@ svg#alaska-map {
     }
     &.cluster-1 {
       fill: #30653a;
-      &.active, &.attached {
+      &.active {
         fill: lighten(#30653a, 20%);
+      }
+      &.attached {
+        fill: lighten(#30653a, 10%);
       }
     }
     &.cluster-2 {
       fill: #7d4f00;
-      &.active, &.attached {
+      &.active {
         fill: lighten(#7d4f00, 20%);
       }
-      &.active {
-        stroke: lighten(#2a616e, 20%);
+      &.attached {
+        fill: lighten(#7d4f00, 10%);
       }
-
     }
     &.cluster-3 {
       fill: #4e597d;
-      &.active, &.attached {
+      &.active {
         fill: lighten(#4e597d, 20%);
+      }
+      &.attached {
+        fill: lighten(#4e597d, 10%);
       }
 
     }
     &.cluster-4 {
       fill: #2a616e;
-      &.active, &.attached {
+      &.active {
         fill: lighten(#2a616e, 20%);
+      }
+      &.attached {
+        fill: lighten(#2a616e, 10%);
       }
 
     }
     &.cluster-5 {
       fill: #a3301e;
-      &.active, &.attached {
+      &.active {
         fill: lighten(#a3301e, 20%);
+      }
+      &.attached {
+        fill: lighten(#a3301e, 10%);
       }
 
     }
     &.cluster-6 {
       fill: #81447f;
-      &.active, &.attached {
+      &.active {
         fill: lighten(#81447f, 20%);
+      }
+      &.attached {
+        fill: lighten(#81447f, 10%);
       }
 
     }
     &.cluster-7 {
       fill: #005fa9;
-      &.active, &.attached {
+      &.active {
         fill: lighten(#005fa9, 20%);
+      }
+      &.attached {
+        fill: lighten(#005fa9, 10%);
       }
 
     }

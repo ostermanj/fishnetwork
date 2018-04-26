@@ -6,53 +6,38 @@ import { ClassList } from '../js-exports/ClassList.js';
 var svg = document.getElementById('alaska-map');
 var timeoutShow,
 	timeoutHide,
-	listenersAreOn;
+	nodes,
+	cycleIndex = -1;
 
-
-
+catalogNodes();
 dataOverlay();
 addEventListeners();
 
-document.querySelector('body').addEventListener('click', addEventListeners);
-
 function addEventListeners(){
-	if ( listenersAreOn !== true ){
-		listenersAreOn = true;
-		document.querySelectorAll('line.active').forEach(l => { // need to handle line opacity via css class so that it can be selected here
-			l.classList.remove('active');
-		});
-		var activeNode = document.querySelector('circle.active');
-		if ( activeNode ) {
-			activeNode.classList.remove('active');
-		}
-		svg.querySelectorAll('circle').forEach(c => {
-			c.addEventListener('mouseenter', activate);
-			c.addEventListener('mouseleave', deactivate);
-			c.addEventListener('focus', activate);
-			c.addEventListener('blur', deactivate);
-			c.addEventListener('click', removeEventListeners);
-		});
+	document.querySelectorAll('line.active').forEach(l => { // need to handle line opacity via css class so that it can be selected here
+		l.classList.remove('active');
+	});
+	var activeNode = document.querySelector('circle.active');
+	if ( activeNode ) {
+		activeNode.classList.remove('active');
 	}
-}
-
-function removeEventListeners(e){
-	listenersAreOn = false;
-	e.stopPropagation();
 	svg.querySelectorAll('circle').forEach(c => {
-		c.removeEventListener('mouseenter', activate);
-		c.removeEventListener('mouseleave', deactivate);
-		c.removeEventListener('click', removeEventListeners);
+		c.addEventListener('mouseenter', activate);
+		c.addEventListener('mouseleave', deactivate);
+		c.addEventListener('focus', activate);
+		c.addEventListener('blur', deactivate);
 	});
 }
 
 function activate(e){
+	console.log(e);
 	if (e.type !== 'focus') {
 		document.activeElement.blur();
-	} else {
-		let circle = document.querySelector('circle.active');
-		if ( circle ) {
-			deactivate.call(circle);
-		}
+	} 
+	let circle = document.querySelector('circle.active');
+	console.log(circle);
+	if ( circle ) {
+		deactivate.call(circle);
 	}
 	this.classList.add('active');
 	showLinks(this.dataset);
@@ -89,28 +74,48 @@ function hideLinks(d){
 }
 function showDetails(d){
 	clearTimeout(timeoutHide);
-	var html = `<b>${d.name}</b><br /><b>Species</b>: ${d.species} | <b>Gear</b>: ${d.gear} | <b>Area</b>: ${d.area} | <b>Number of permits</b>: ${d.count}`;
-	var overlayDiv = document.getElementById('overlay-div');
-	overlayDiv.style.opacity = 0;
+	var html = `<b>Fishery: </b>${d.name}<br /><b>Species</b>: ${d.species} | <b>Gear</b>: ${d.gear} | <b>Area</b>: ${d.area} | <b>Number of permits</b>: ${d.count}`;
+	var details = document.querySelector('#detail-div');
+	details.style.opacity = 0;
 	timeoutShow = setTimeout(function(){
-		overlayDiv.innerHTML = html;
-		overlayDiv.style.opacity = 1;
+		details.innerHTML = html;
+		details.style.opacity = 1;
 	},250);
 }
 function hideDetails(){
 	clearTimeout(timeoutShow);
-	var html = 'Select a fishery or tab through for details.';
-	var overlayDiv = document.getElementById('overlay-div');
-	overlayDiv.style.opacity = 0;
+	var details = document.querySelector('#detail-div');
+	details.style.opacity = 0;
 	timeoutHide = setTimeout(function(){
-		overlayDiv.innerHTML = html;
-		overlayDiv.style.opacity = 1;
+		details.innerHTML = '<em>Select a fishery or cycle through for details.</em>';
+		details.style.opacity = 1;
 	},250);
-
 }
 function dataOverlay(){
 	var overlayDiv = document.createElement('div');
 	overlayDiv.id = 'overlay-div';
-	overlayDiv.innerHTML = 'Select a fishery or tab through for details.';
+	var detailWrapper = document.createElement('div');
+	detailWrapper.id = 'detail-wrapper';
+	var details = document.createElement('div');
+	details.id = 'detail-div';
+	details.innerHTML = '<em>Select a fishery or cycle through for details.</em>';
+	detailWrapper.appendChild(details);
+	overlayDiv.appendChild(detailWrapper);
+	var btn = document.createElement('button');
+	btn.innerHTML = 'Next';
+	btn.addEventListener('click', cycleNext);
+	overlayDiv.appendChild(btn);
 	document.getElementById('map-container').appendChild(overlayDiv);
+}
+
+function cycleNext(){
+	cycleIndex++;
+	if ( cycleIndex === nodes.length ) {
+		cycleIndex = 0;
+	}
+	activate.call(nodes[cycleIndex],'btn');
+}
+
+function catalogNodes(){
+	nodes = document.querySelectorAll('#alaska-map .nodes circle');
 }
