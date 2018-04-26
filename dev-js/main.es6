@@ -98,11 +98,14 @@ function dataOverlay(){
 	detailWrapper.id = 'detail-wrapper';
 	var details = document.createElement('div');
 	details.id = 'detail-div';
+	details.setAttribute('aria-live','polite');
 	details.innerHTML = '<em>Select a fishery or cycle through for details.</em>';
 	detailWrapper.appendChild(details);
 	overlayDiv.appendChild(detailWrapper);
 	var btn = document.createElement('button');
 	btn.id = 'cycle-through-btn';
+	btn.setAttribute('aria-label','Select the next fishery on the map for details.');
+	btn.setAttribute('aria-controls','detail-div');
 	btn.innerHTML = 'Next';
 	overlayDiv.appendChild(btn);
 	document.getElementById('map-outer-container').insertAdjacentHTML('afterbegin',overlayDiv.innerHTML);
