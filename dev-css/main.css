@@ -1,11 +1,8 @@
 #map-container {
   position: relative;
-  padding-bottom: calc(53% + 80px); }
+  padding-bottom: calc(53%); }
 
 #overlay-div {
-  position: absolute;
-  top: 0;
-  background: rgba(255, 255, 255, 0.8);
   opacity: 1;
   transition: opacity 0.25s linear;
   padding: 10px; }
@@ -17,8 +14,7 @@
   justify-content: flex-end; }
 
 svg#alaska-map {
-  position: absolute;
-  top: 80px; }
+  position: absolute; }
   svg#alaska-map .links line {
     mix-blend-mode: hard-light;
     opacity: 0.30; }

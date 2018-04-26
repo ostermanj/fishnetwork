@@ -2,13 +2,10 @@ $blue: #051839;
 
 #map-container {
   position: relative;
-  padding-bottom: calc(53% + 80px);
+  padding-bottom: calc(53%);
 }
 
 #overlay-div {
-  position: absolute;
-  top:0;
-  background: rgba(255,255,255,0.8);
   opacity: 1;
   transition: opacity 0.25s linear; 
   padding:10px;
@@ -23,7 +20,6 @@ $blue: #051839;
 
 svg#alaska-map {
   position: absolute;
-  top: 80px;
   .links line {
     
     mix-blend-mode: hard-light;

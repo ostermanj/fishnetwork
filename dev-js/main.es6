@@ -102,10 +102,11 @@ function dataOverlay(){
 	detailWrapper.appendChild(details);
 	overlayDiv.appendChild(detailWrapper);
 	var btn = document.createElement('button');
+	btn.id = 'cycle-through-btn';
 	btn.innerHTML = 'Next';
-	btn.addEventListener('click', cycleNext);
 	overlayDiv.appendChild(btn);
-	document.getElementById('map-container').appendChild(overlayDiv);
+	document.getElementById('map-outer-container').insertAdjacentHTML('afterbegin',overlayDiv.innerHTML);
+	document.getElementById('cycle-through-btn').addEventListener('click', cycleNext);
 }
 
 function cycleNext(){
