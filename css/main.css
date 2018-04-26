@@ -1,19 +1,23 @@
 #map-container {
   position: relative;
-  padding-top: 40px;
-  padding-bottom: calc(53% + 40px); }
+  padding-bottom: calc(53%); }
 
 #overlay-div {
-  position: absolute;
-  top: 0;
-  background: rgba(255, 255, 255, 0.8);
   opacity: 1;
   transition: opacity 0.25s linear;
   padding: 10px; }
 
+#detail-wrapper {
+  min-height: 70px;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+      flex-direction: column;
+  -ms-flex-pack: end;
+      justify-content: flex-end; }
+
 svg#alaska-map {
-  position: absolute;
-  top: 40px; }
+  position: absolute; }
 
 svg#alaska-map .links line {
     mix-blend-mode: hard-light;
